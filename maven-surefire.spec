@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        2.15
-Release:        3.11%{?dist}
+Release:        3.12%{?dist}
 Epoch:          0
 Summary:        Test framework project
 License:        ASL 2.0 and CPL
@@ -14,33 +14,33 @@ Source0:        http://repo2.maven.org/maven2/org/apache/maven/surefire/surefire
 Source2:        http://junit.sourceforge.net/cpl-v10.html
 
 BuildArch:      noarch
-BuildRequires:  maven30-apache-commons-lang3
+BuildRequires:  %{?scl_prefix}apache-commons-lang3
 BuildRequires:  %{?scl_prefix_java_common}javapackages-tools
 BuildRequires:  %{?scl_prefix_java_common}junit >= 3.8.2
-BuildRequires:  maven30-plexus-utils
-BuildRequires:  maven30-testng
+BuildRequires:  %{?scl_prefix}plexus-utils
+BuildRequires:  %{?scl_prefix}testng
 
 BuildRequires:  %{?scl_prefix_java_common}maven-local
-BuildRequires:  maven30-maven-invoker-plugin
-BuildRequires:  maven30-maven-plugin-annotations
-BuildRequires:  maven30-maven-plugin-plugin
-BuildRequires:  maven30-maven-resources-plugin
-BuildRequires:  maven30-maven-shade-plugin
-BuildRequires:  maven30-maven-shared-utils
-BuildRequires:  maven30-maven-verifier
-BuildRequires:  maven30-maven-enforcer-plugin
-BuildRequires:  maven30-maven-failsafe-plugin
-BuildRequires:  maven30-maven-surefire-plugin >= 0:2.12-1
-BuildRequires:  maven30-maven-toolchain
-BuildRequires:  maven30-maven-project
-BuildRequires:  maven30-maven-common-artifact-filters
-BuildRequires:  maven30-modello
-BuildRequires:  maven30-plexus-containers-container-default
-BuildRequires:  maven30-maven-plugin-testing-harness
-BuildRequires:  maven30-javacc-maven-plugin
-BuildRequires:  maven30-maven-doxia-sink-api
-BuildRequires:  maven30-maven-doxia-core
-BuildRequires:  maven30-maven-doxia-sitetools
+BuildRequires:  %{?scl_prefix}maven-invoker-plugin
+BuildRequires:  %{?scl_prefix}maven-plugin-annotations
+BuildRequires:  %{?scl_prefix}maven-plugin-plugin
+BuildRequires:  %{?scl_prefix}maven-resources-plugin
+BuildRequires:  %{?scl_prefix}maven-shade-plugin
+BuildRequires:  %{?scl_prefix}maven-shared-utils
+BuildRequires:  %{?scl_prefix}maven-verifier
+BuildRequires:  %{?scl_prefix}maven-enforcer-plugin
+BuildRequires:  %{?scl_prefix}maven-failsafe-plugin
+BuildRequires:  %{?scl_prefix}maven-surefire-plugin >= 0:2.12-1
+BuildRequires:  %{?scl_prefix}maven-toolchain
+BuildRequires:  %{?scl_prefix}maven-project
+BuildRequires:  %{?scl_prefix}maven-common-artifact-filters
+BuildRequires:  %{?scl_prefix}modello
+BuildRequires:  %{?scl_prefix}plexus-containers-container-default
+BuildRequires:  %{?scl_prefix}maven-plugin-testing-harness
+BuildRequires:  %{?scl_prefix}javacc-maven-plugin
+BuildRequires:  %{?scl_prefix}maven-doxia-sink-api
+BuildRequires:  %{?scl_prefix}maven-doxia-core
+BuildRequires:  %{?scl_prefix}maven-doxia-sitetools
 
 
 %description
@@ -105,7 +105,7 @@ Javadoc for %{pkg_name}.
 
 %prep
 %setup -q -n surefire-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 cp -p %{SOURCE2} .
 %pom_add_dep org.apache.maven:maven-compat maven-surefire-common
@@ -125,7 +125,7 @@ done
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_package ":*{surefire-plugin,report-plugin}*" @1
 %mvn_package ":*{junit,testng,failsafe-plugin,report-parser}*"  @1
@@ -135,7 +135,7 @@ set -e -x
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -158,6 +158,9 @@ set -e -x
 %doc LICENSE NOTICE cpl-v10.html
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 0:2.15-3.12
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 0:2.15-3.11
 - maven33 rebuild
 

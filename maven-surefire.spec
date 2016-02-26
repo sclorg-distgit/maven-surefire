@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        2.15
-Release:        3.12%{?dist}
+Release:        3.13%{?dist}
 Epoch:          0
 Summary:        Test framework project
 License:        ASL 2.0 and CPL
@@ -20,7 +20,7 @@ BuildRequires:  %{?scl_prefix_java_common}junit >= 3.8.2
 BuildRequires:  %{?scl_prefix}plexus-utils
 BuildRequires:  %{?scl_prefix}testng
 
-BuildRequires:  %{?scl_prefix_java_common}maven-local
+BuildRequires:  %{?scl_prefix}maven-local
 BuildRequires:  %{?scl_prefix}maven-invoker-plugin
 BuildRequires:  %{?scl_prefix}maven-plugin-annotations
 BuildRequires:  %{?scl_prefix}maven-plugin-plugin
@@ -158,6 +158,9 @@ set -e -x
 %doc LICENSE NOTICE cpl-v10.html
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 0:2.15-3.13
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 0:2.15-3.12
 - maven33 rebuild #2
 
